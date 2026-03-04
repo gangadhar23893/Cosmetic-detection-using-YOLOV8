@@ -1,0 +1,1 @@
+conda env create = conda create -n waste python=3.7 -y
