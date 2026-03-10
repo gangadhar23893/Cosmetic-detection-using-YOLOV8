@@ -1,7 +1,4 @@
-from CosmeticDetection.exception import AppException
-import sys
+from CosmeticDetection.pipeline.training_pipeline import TrainPipeline
 
-try:
-    a = 1/"as"
-except Exception as e:
-    raise AppException(e,sys)
+obj = TrainPipeline()
+obj.run_pipeline()
