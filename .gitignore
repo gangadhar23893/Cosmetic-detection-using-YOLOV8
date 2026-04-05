@@ -143,6 +143,7 @@ venv/
 ENV/
 env.bak/
 venv.bak/
+Cosmetic/
 
 # Spyder project settings
 .spyderproject
