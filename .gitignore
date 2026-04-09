@@ -209,3 +209,9 @@ __marimo__/
 
 #artifacts
 artifacts/*
+
+train/*
+valid/*
+runs/*
+data.yaml
+yolov8n.pt
