@@ -26,11 +26,17 @@ def write_yaml_file(file_path:str,content:object,replace:bool=False)->None:
         raise AppException(e,sys)
     
 def decodeImage(imgstring,filename):
-    imgdata = base64.b64decode(imgstring)
-    with open("./data/"+filename,"wb") as f:
-        f.write(imgdata)
-        f.close()
-
+    try:
+        # 🔥 Remove metadata part
+        if "base64," in imgstring:
+            imgstring = imgstring.split("base64,")[1]
+        imgdata = base64.b64decode(imgstring)
+        with open(filename, 'wb') as f:
+            f.write(imgdata)
+        logging.info("Image decoded and saved successfully")
+        print(f"Image decoded succesfully")
+    except Exception as e:
+        raise AppException(e,sys)
 def encodeImageIntoBase64(croppedimagepath):
     with open(croppedimagepath,'rb') as f:
         return base64.b64encode(f.read())

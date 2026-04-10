@@ -24,32 +24,36 @@ class ModelTrainer:
             temp_dir  = "temp_trainig"
             exp_name = "yolo_exp"
 
-            model_trainer_dir = os.makedirs(self.model_trainer_config.model_trainer_dir,exist_ok=True)
+            os.makedirs(self.model_trainer_config.model_trainer_dir,exist_ok=True)
+            model_trainer_dir = self.model_trainer_config.model_trainer_dir
             
             logging.info(f"Loading YOLOV8N model")
             model = YOLO(self.model_trainer_config.weight_name)
 
             logging.info(f"Starting model training")
-            model.train(
+            results = model.train(
                 data = "./data.yaml",
                 epochs = self.model_trainer_config.no_epochs,
                 imgsz=640,
                 batch=self.model_trainer_config.batch_size,
                 workers=0,
                 device="cpu",
-                project = temp_dir,
-                name=exp_name,
+                project = "runs/detect/temp_trainig",
+                name="yolo_exp",
                 plots=True,
                 cache=False,
                 amp=False
             )
+            save_dir = results.save_dir
 
-            best_model_src = os.path.join(
-                temp_dir,
-                exp_name,
-                "weights",
-                "best.pt"
-            )
+            best_model_src = os.path.join(save_dir,"weights","best.pt")
+
+            # best_model_src = os.path.join(
+            #     temp_dir,
+            #     exp_name,
+            #     "weights",
+            #     "best.pt"
+            # )
 
             best_model_dest = os.path.join(
                 model_trainer_dir,
