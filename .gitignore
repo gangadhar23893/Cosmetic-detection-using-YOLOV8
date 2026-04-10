@@ -215,3 +215,4 @@ valid/*
 runs/*
 data.yaml
 yolov8n.pt
+credentials.txt
