@@ -5,6 +5,7 @@ WORKDIR /app
 COPY . /app
 
 RUN ls -R /app   
+
 # 🔥 DEBUG LINE
 
 RUN apt-get update && apt-get install -y \
